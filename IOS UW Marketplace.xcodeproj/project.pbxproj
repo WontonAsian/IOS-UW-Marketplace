@@ -72,10 +72,10 @@
 		B72AD0582C08B9AB0002C903 /* IOS UW MarketplaceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IOS UW MarketplaceUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B72AD05C2C08B9AB0002C903 /* IOS_UW_MarketplaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_UW_MarketplaceUITests.swift; sourceTree = "<group>"; };
 		B72AD05E2C08B9AB0002C903 /* IOS_UW_MarketplaceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_UW_MarketplaceUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		B72AD06B2C08B9CD0002C903 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = ../../../ContentView.swift; sourceTree = "<group>"; };
-		B72AD06C2C08B9CD0002C903 /* SellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SellView.swift; path = ../../../SellView.swift; sourceTree = "<group>"; };
-		B72AD06E2C08B9CD0002C903 /* AllItemsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AllItemsView.swift; path = ../../../AllItemsView.swift; sourceTree = "<group>"; };
-		B72AD06F2C08B9CD0002C903 /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileView.swift; path = ../../../UserProfileView.swift; sourceTree = "<group>"; };
+		B72AD06B2C08B9CD0002C903 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B72AD06C2C08B9CD0002C903 /* SellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellView.swift; sourceTree = "<group>"; };
+		B72AD06E2C08B9CD0002C903 /* AllItemsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllItemsView.swift; sourceTree = "<group>"; };
+		B72AD06F2C08B9CD0002C903 /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
