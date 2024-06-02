@@ -1,13 +1,16 @@
 import SwiftUI
 import RealmSwift
 
-// Define your model
 class Item: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var title: String = ""
     @Persisted var price: Double = 0.0
     @Persisted var itemDescription: String = ""
     @Persisted var category: String = ""
+    @Persisted var datePosted: Date = Date()
+    @Persisted var isSold: Bool = false
+    @Persisted var sellerID: String = ""
+    @Persisted var buyerID: String?
 }
 
 struct SellView: View {
@@ -16,7 +19,8 @@ struct SellView: View {
     @State private var itemDescription: String = ""
     @State private var selectedCategory: String = "Clothing"
     let categories = ["Clothing", "Electronics", "Kitchen", "Home Goods", "Misc"]
-    
+    var userEmail: String
+
     var body: some View {
         NavigationView {
             VStack {
@@ -47,7 +51,7 @@ struct SellView: View {
                     .padding()
                 }
                 .frame(width: UIScreen.main.bounds.width - 40)
-                Spacer()  // Pushes the form up
+                Spacer()
             }
             .navigationBarTitle("Sell Items", displayMode: .inline)
         }
@@ -82,10 +86,20 @@ struct SellView: View {
                         newItem.price = Double(self.itemPrice) ?? 0.0
                         newItem.itemDescription = self.itemDescription
                         newItem.category = self.selectedCategory
+                        newItem.datePosted = Date() // Set the current date and time
+                        newItem.isSold = false // Default to not sold
+                        newItem.sellerID = self.userEmail // Set sellerID to the user's email
+                        newItem.buyerID = nil // Initially, buyerID is nil
 
                         try! realm.write {
                             realm.add(newItem)
                         }
+                        
+                        // Clear input fields
+                        self.itemName = ""
+                        self.itemPrice = ""
+                        self.itemDescription = ""
+                        self.selectedCategory = "Clothing"
 
                         print("Item added successfully.")
                     case .failure(let error):
@@ -101,6 +115,6 @@ struct SellView: View {
 
 struct SellView_Previews: PreviewProvider {
     static var previews: some View {
-        SellView()
+        SellView(userEmail: "kevin@example.com")
     }
 }

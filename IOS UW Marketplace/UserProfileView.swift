@@ -1,12 +1,16 @@
 import SwiftUI
 
 struct UserProfileView: View {
+    var userName: String
+    var userEmail: String
+    @Binding var isAuthenticated: Bool
+
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Profile Details")) {
-                    Text("User Name: Kevin")
-                    Text("Email: kevin@example.com")
+                    Text("User Name: \(userName)")
+                    Text("Email: \(userEmail)")
                 }
 
                 Section(header: Text("Listed Items")) {
@@ -15,7 +19,7 @@ struct UserProfileView: View {
                 }
 
                 Button("Log Out") {
-                    // Handle log out
+                    isAuthenticated = false
                 }
                 .foregroundColor(.red)
             }
@@ -25,7 +29,8 @@ struct UserProfileView: View {
 }
 
 struct UserProfileView_Previews: PreviewProvider {
+    @State static var isAuthenticated = true
     static var previews: some View {
-        UserProfileView()
+        UserProfileView(userName: "Kevin", userEmail: "kevin@example.com", isAuthenticated: $isAuthenticated)
     }
 }

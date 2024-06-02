@@ -15,10 +15,12 @@
 		B72AD0532C08B9AB0002C903 /* IOS_UW_MarketplaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72AD0522C08B9AB0002C903 /* IOS_UW_MarketplaceTests.swift */; };
 		B72AD05D2C08B9AB0002C903 /* IOS_UW_MarketplaceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72AD05C2C08B9AB0002C903 /* IOS_UW_MarketplaceUITests.swift */; };
 		B72AD05F2C08B9AB0002C903 /* IOS_UW_MarketplaceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72AD05E2C08B9AB0002C903 /* IOS_UW_MarketplaceUITestsLaunchTests.swift */; };
-		B72AD0702C08B9CD0002C903 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72AD06B2C08B9CD0002C903 /* ContentView.swift */; };
 		B72AD0712C08B9CD0002C903 /* SellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72AD06C2C08B9CD0002C903 /* SellView.swift */; };
 		B72AD0732C08B9CD0002C903 /* AllItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72AD06E2C08B9CD0002C903 /* AllItemsView.swift */; };
-		B72AD0742C08B9CD0002C903 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72AD06F2C08B9CD0002C903 /* UserProfileView.swift */; };
+		B78911F72C0C4DB500F030A9 /* MSAL in Frameworks */ = {isa = PBXBuildFile; productRef = B78911F62C0C4DB500F030A9 /* MSAL */; };
+		B78911F92C0C4FF800F030A9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78911F82C0C4FF800F030A9 /* LoginView.swift */; };
+		B78911FC2C0C540C00F030A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78911FB2C0C540C00F030A9 /* AppDelegate.swift */; };
+		B78912002C0C5F1600F030A9 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78911FF2C0C5F1600F030A9 /* UserProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,10 +74,12 @@
 		B72AD0582C08B9AB0002C903 /* IOS UW MarketplaceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IOS UW MarketplaceUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B72AD05C2C08B9AB0002C903 /* IOS_UW_MarketplaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_UW_MarketplaceUITests.swift; sourceTree = "<group>"; };
 		B72AD05E2C08B9AB0002C903 /* IOS_UW_MarketplaceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_UW_MarketplaceUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		B72AD06B2C08B9CD0002C903 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B72AD06C2C08B9CD0002C903 /* SellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellView.swift; sourceTree = "<group>"; };
 		B72AD06E2C08B9CD0002C903 /* AllItemsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllItemsView.swift; sourceTree = "<group>"; };
-		B72AD06F2C08B9CD0002C903 /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		B78911F82C0C4FF800F030A9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B78911FA2C0C510C00F030A9 /* IOS-UW-Marketplace-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "IOS-UW-Marketplace-Info.plist"; sourceTree = SOURCE_ROOT; };
+		B78911FB2C0C540C00F030A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B78911FF2C0C5F1600F030A9 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B71EEE142C08BB7200D0A0D8 /* RealmSwift in Frameworks */,
+				B78911F72C0C4DB500F030A9 /* MSAL in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,11 +133,13 @@
 		B72AD0402C08B9AA0002C903 /* IOS UW Marketplace */ = {
 			isa = PBXGroup;
 			children = (
+				B78911FA2C0C510C00F030A9 /* IOS-UW-Marketplace-Info.plist */,
 				B72AD0412C08B9AA0002C903 /* IOS_UW_MarketplaceApp.swift */,
+				B78911F82C0C4FF800F030A9 /* LoginView.swift */,
+				B78911FB2C0C540C00F030A9 /* AppDelegate.swift */,
 				B72AD06E2C08B9CD0002C903 /* AllItemsView.swift */,
-				B72AD06B2C08B9CD0002C903 /* ContentView.swift */,
 				B72AD06C2C08B9CD0002C903 /* SellView.swift */,
-				B72AD06F2C08B9CD0002C903 /* UserProfileView.swift */,
+				B78911FF2C0C5F1600F030A9 /* UserProfileView.swift */,
 				B72AD0452C08B9AB0002C903 /* Assets.xcassets */,
 				B72AD0472C08B9AB0002C903 /* Preview Content */,
 			);
@@ -190,6 +197,7 @@
 			name = "IOS UW Marketplace";
 			packageProductDependencies = (
 				B71EEE132C08BB7200D0A0D8 /* RealmSwift */,
+				B78911F62C0C4DB500F030A9 /* MSAL */,
 			);
 			productName = "IOS UW Marketplace";
 			productReference = B72AD03E2C08B9AA0002C903 /* IOS UW Marketplace.app */;
@@ -268,6 +276,7 @@
 			mainGroup = B72AD0352C08B9AA0002C903;
 			packageReferences = (
 				B72AD0752C08BAA40002C903 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				B78911F52C0C4DB500F030A9 /* XCRemoteSwiftPackageReference "microsoft-authentication-library-for-objc" */,
 			);
 			productRefGroup = B72AD03F2C08B9AA0002C903 /* Products */;
 			projectDirPath = "";
@@ -311,11 +320,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B72AD0742C08B9CD0002C903 /* UserProfileView.swift in Sources */,
+				B78912002C0C5F1600F030A9 /* UserProfileView.swift in Sources */,
+				B78911F92C0C4FF800F030A9 /* LoginView.swift in Sources */,
 				B72AD0712C08B9CD0002C903 /* SellView.swift in Sources */,
 				B72AD0732C08B9CD0002C903 /* AllItemsView.swift in Sources */,
+				B78911FC2C0C540C00F030A9 /* AppDelegate.swift in Sources */,
 				B72AD0422C08B9AA0002C903 /* IOS_UW_MarketplaceApp.swift in Sources */,
-				B72AD0702C08B9CD0002C903 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +492,7 @@
 				DEVELOPMENT_TEAM = 89H77Z6NRT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "IOS-UW-Marketplace-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -511,6 +522,7 @@
 				DEVELOPMENT_TEAM = 89H77Z6NRT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "IOS-UW-Marketplace-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -655,6 +667,14 @@
 				kind = branch;
 			};
 		};
+		B78911F52C0C4DB500F030A9 /* XCRemoteSwiftPackageReference "microsoft-authentication-library-for-objc" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AzureAD/microsoft-authentication-library-for-objc";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -662,6 +682,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B72AD0752C08BAA40002C903 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		B78911F62C0C4DB500F030A9 /* MSAL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B78911F52C0C4DB500F030A9 /* XCRemoteSwiftPackageReference "microsoft-authentication-library-for-objc" */;
+			productName = MSAL;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
