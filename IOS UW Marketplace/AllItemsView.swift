@@ -12,6 +12,7 @@ struct AllItemsView: View {
                 AllItemRow(item: item, userEmail: userEmail, onItemBought: { boughtItem in
                     removeItem(boughtItem)
                 })
+                .listRowInsets(EdgeInsets())
             }
             .navigationBarTitle("All Items", displayMode: .inline)
             .onAppear {
@@ -47,8 +48,6 @@ struct AllItemsView: View {
             "filter": ["isSold": ["$eq": false]]
         ]
 
-        print("Request Body: \(requestBody)")
-        
         request.httpBody = try? JSONSerialization.data(withJSONObject: requestBody, options: [])
 
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -64,10 +63,6 @@ struct AllItemsView: View {
 
             if let httpResponse = response as? HTTPURLResponse {
                 print("HTTP Response Status: \(httpResponse.statusCode)")
-            }
-
-            if let responseString = String(data: data, encoding: .utf8) {
-                print("Response Data: \(responseString)")
             }
 
             do {
@@ -90,38 +85,73 @@ struct AllItemRow: View {
     let item: ListedItem
     let userEmail: String
     let onItemBought: (ListedItem) -> Void
+    @State private var showAlert = false
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
             Text(item.title)
                 .font(.headline)
             Text(item.itemDescription)
                 .font(.subheadline)
             Text("Category: \(item.category)")
                 .font(.subheadline)
-            Text("Price: $\(item.price)")
+            Text("Price: \(formatPrice(item.price))")
                 .font(.subheadline)
-            Text("Date Posted: \(item.datePosted)")
+            Text("Date Posted: \(formatDate(item.datePosted))")
                 .font(.subheadline)
-            Text("Sold: \(item.isSold ? "Yes" : "No")")
+            Text("Seller: \(item.sellerID)")
                 .font(.subheadline)
+            
             Button(action: {
-                buyItem(item)
+                if item.sellerID == userEmail {
+                    showAlert = true
+                } else {
+                    buyItem(item)
+                }
             }) {
-                Text("Buy")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(5)
+                HStack {
+                    Spacer()
+                    Text("Buy")
+                        .foregroundColor(.white)
+                    Spacer()
+                }
+                .padding()
+                .background(Color.blue)
+                .cornerRadius(5)
+                .contentShape(Rectangle())
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Cannot Buy Item"), message: Text("You cannot buy your own item."), dismissButton: .default(Text("OK")))
             }
         }
         .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(radius: 5)
+    }
+
+    private func formatPrice(_ price: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        return formatter.string(from: NSNumber(value: price)) ?? "$\(price)"
+    }
+
+    private func formatDate(_ dateString: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        if let date = inputFormatter.date(from: dateString) {
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateStyle = .medium
+            outputFormatter.timeStyle = .none
+            return outputFormatter.string(from: date)
+        }
+        return dateString
     }
 
     private func buyItem(_ item: ListedItem) {
         print("Buying item with ID: \(item.id) by user: \(userEmail)")
         let apiKey = "evWnPMfG5GwnCghHBR3zb5kTsDMwnmfU2JTvE8fywXL87nV5y0vaYgxn8D793NLe"
-        let baseURL = "https://us-west-2.aws.data.mongodb-api.com/app/data-xogcpqd/endpoint/data/v1/action/find"
+        let baseURL = "https://us-west-2.aws.data.mongodb-api.com/app/data-xogcpqd/endpoint/data/v1/action/updateOne"
 
         guard let url = URL(string: baseURL) else {
             print("Invalid URL")
@@ -137,7 +167,7 @@ struct AllItemRow: View {
             "collection": "Item",
             "database": "SellingItems",
             "dataSource": "Cluster0",
-            "filter": ["_id": item.id],
+            "filter": ["_id": ["$oid": item.id]], // Ensure proper BSON format
             "update": ["$set": ["isSold": true, "buyerID": userEmail]]
         ]
 
@@ -169,4 +199,25 @@ struct AllItemsView_Previews: PreviewProvider {
     static var previews: some View {
         AllItemsView(userName: "michelle", userEmail: "mwu1@uw.edu", isAuthenticated: $isAuthenticated)
     }
+}
+
+struct ListedItem: Identifiable, Codable {
+    var id: String { _id }
+    var _id: String
+    var title: String
+    var price: Double
+    var itemDescription: String
+    var category: String
+    var datePosted: String
+    var isSold: Bool
+    var sellerID: String
+    var buyerID: String?
+
+    private enum CodingKeys: String, CodingKey {
+        case _id, title, price, itemDescription, category, datePosted, isSold, sellerID, buyerID
+    }
+}
+
+struct MongoResponse: Codable {
+    let documents: [ListedItem]
 }
