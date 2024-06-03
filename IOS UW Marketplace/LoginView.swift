@@ -11,7 +11,7 @@ struct LoginView: View {
             VStack {
                 if isAuthenticated {
                     // Navigate to AllItemsView when authenticated
-                    AllItemsView(userEmail: userEmail, userName: userName, isAuthenticated: $isAuthenticated)
+                    AllItemsView(userName: userName, userEmail: userEmail, isAuthenticated: $isAuthenticated)
                 } else {
                     Text("Welcome to UW Marketplace")
                         .font(.largeTitle)
