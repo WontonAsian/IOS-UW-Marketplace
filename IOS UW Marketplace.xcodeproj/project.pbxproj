@@ -75,7 +75,7 @@
 		B72AD05C2C08B9AB0002C903 /* IOS_UW_MarketplaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_UW_MarketplaceUITests.swift; sourceTree = "<group>"; };
 		B72AD05E2C08B9AB0002C903 /* IOS_UW_MarketplaceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_UW_MarketplaceUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B72AD06C2C08B9CD0002C903 /* SellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellView.swift; sourceTree = "<group>"; };
-		B72AD06E2C08B9CD0002C903 /* AllItemsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllItemsView.swift; sourceTree = "<group>"; };
+		B72AD06E2C08B9CD0002C903 /* AllItemsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllItemsView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcfilelist; };
 		B78911F82C0C4FF800F030A9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B78911FA2C0C510C00F030A9 /* IOS-UW-Marketplace-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "IOS-UW-Marketplace-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B78911FB2C0C540C00F030A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -277,6 +277,7 @@
 			packageReferences = (
 				B72AD0752C08BAA40002C903 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				B78912032C0C77F700F030A9 /* XCRemoteSwiftPackageReference "microsoft-authentication-library-for-objc" */,
+				A62E3D7D2C0D5B65002411B8 /* XCRemoteSwiftPackageReference "mongo-swift-driver" */,
 			);
 			productRefGroup = B72AD03F2C08B9AA0002C903 /* Products */;
 			projectDirPath = "";
@@ -489,7 +490,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IOS UW Marketplace/Preview Content\"";
-				DEVELOPMENT_TEAM = 89H77Z6NRT;
+				DEVELOPMENT_TEAM = PTPTVUXK8V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "IOS-UW-Marketplace-Info.plist";
@@ -519,7 +520,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IOS UW Marketplace/Preview Content\"";
-				DEVELOPMENT_TEAM = 89H77Z6NRT;
+				DEVELOPMENT_TEAM = PTPTVUXK8V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "IOS-UW-Marketplace-Info.plist";
@@ -659,6 +660,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A62E3D7D2C0D5B65002411B8 /* XCRemoteSwiftPackageReference "mongo-swift-driver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mongodb/mongo-swift-driver";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		B72AD0752C08BAA40002C903 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";

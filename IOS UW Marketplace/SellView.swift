@@ -115,6 +115,6 @@ struct SellView: View {
 
 struct SellView_Previews: PreviewProvider {
     static var previews: some View {
-        SellView(userEmail: "kevin@example.com")
+        SellView(userEmail: "mwu1@uw.edu")
     }
 }
