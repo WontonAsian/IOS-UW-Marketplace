@@ -3,19 +3,18 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleURLTypes</key>
-<array>
-    <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-            <string>msauth.com.449.auth</string>
-        </array>
-    </dict>
-</array>
-<key>LSApplicationQueriesSchemes</key>
-<array>
-    <string>msauthv2</string>
-    <string>msauthv3</string>
-</array>
-
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>msauth.com.449.auth</string>
+			</array>
+		</dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>msauthv2</string>
+		<string>msauthv3</string>
+	</array>
 </dict>
 </plist>
