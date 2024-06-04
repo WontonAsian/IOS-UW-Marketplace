@@ -13,6 +13,7 @@ struct UserProfileView: View {
 
     var body: some View {
         NavigationView {
+            
             Form {
                 Section(header: Text("Profile Details")) {
                     Text("User Name: \(userName)")
