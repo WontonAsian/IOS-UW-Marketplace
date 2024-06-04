@@ -102,32 +102,14 @@ struct AllItemRow: View {
             Text("Seller: \(item.sellerID)")
                 .font(.subheadline)
             
-            Button(action: {
-                if item.sellerID == userEmail {
-                    showAlert = true
-                } else {
-                    buyItem(item)
-                }
-            }) {
-                HStack {
-                    Spacer()
-                    Text("Buy")
-                        .foregroundColor(.white)
-                    Spacer()
-                }
-                .padding()
-                .background(Color.blue)
-                .cornerRadius(5)
-                .contentShape(Rectangle())
-            }
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text("Cannot Buy Item"), message: Text("You cannot buy your own item."), dismissButton: .default(Text("OK")))
-            }
+            
         }
         .padding()
         .background(Color.white)
         .cornerRadius(10)
-        .shadow(radius: 5)
+//        .shadow(radius: 5)
+        
+        BuyButton(item: item, userEmail: userEmail, showAlert: $showAlert, onItemBought: onItemBought).disabled(false)
     }
 
     private func formatPrice(_ price: Double) -> String {
@@ -146,6 +128,37 @@ struct AllItemRow: View {
             return outputFormatter.string(from: date)
         }
         return dateString
+    }
+}
+
+struct BuyButton: View {
+    let item: ListedItem
+    let userEmail: String
+    @Binding var showAlert: Bool
+    let onItemBought: (ListedItem) -> Void
+
+    var body: some View {
+        Button(action: {
+            if item.sellerID == userEmail {
+                showAlert = true
+            } else {
+                buyItem(item)
+            }
+        }) {
+            HStack {
+                Spacer()
+                Text("Buy")
+                    .foregroundColor(.white)
+                Spacer()
+            }
+            .padding()
+            .background(Color.blue)
+            .cornerRadius(5)
+            .contentShape(Rectangle())
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Cannot Buy Item"), message: Text("You cannot buy your own item."), dismissButton: .default(Text("OK")))
+        }
     }
 
     private func buyItem(_ item: ListedItem) {
@@ -167,7 +180,7 @@ struct AllItemRow: View {
             "collection": "Item",
             "database": "SellingItems",
             "dataSource": "Cluster0",
-            "filter": ["_id": ["$oid": item.id]], // Ensure proper BSON format
+            "filter": ["_id": ["$oid": item.id]],
             "update": ["$set": ["isSold": true, "buyerID": userEmail]]
         ]
 

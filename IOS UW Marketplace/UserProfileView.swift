@@ -19,11 +19,6 @@ struct UserProfileView: View {
                     Text("Email: \(userEmail)")
                 }
 
-                Button("Log Out") {
-                    signOut()
-                }
-                .foregroundColor(.red)
-
                 DisclosureGroup("Listed Items", isExpanded: $showListedItems) {
                     if listedItems.isEmpty {
                         Text("No items listed.")
@@ -49,6 +44,11 @@ struct UserProfileView: View {
                         }
                     }
                 }
+                
+                Button("Log Out") {
+                    signOut()
+                }
+                .foregroundColor(.red)
             }
             .navigationBarTitle("User Profile", displayMode: .inline)
             .onAppear {
