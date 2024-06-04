@@ -499,7 +499,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IOS UW Marketplace/Preview Content\"";
-				DEVELOPMENT_TEAM = PTPTVUXK8V;
+				DEVELOPMENT_TEAM = 89H77Z6NRT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "IOS-UW-Marketplace-Info.plist";
@@ -513,7 +513,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.uw.ischool.hoangn4.IOS-UW-Marketplace";
+				PRODUCT_BUNDLE_IDENTIFIER = com.449.auth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -530,7 +530,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IOS UW Marketplace/Preview Content\"";
-				DEVELOPMENT_TEAM = PTPTVUXK8V;
+				DEVELOPMENT_TEAM = 89H77Z6NRT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "IOS-UW-Marketplace-Info.plist";
@@ -544,7 +544,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.uw.ischool.hoangn4.IOS-UW-Marketplace";
+				PRODUCT_BUNDLE_IDENTIFIER = com.449.auth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
