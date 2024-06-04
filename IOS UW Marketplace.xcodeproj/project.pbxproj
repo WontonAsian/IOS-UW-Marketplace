@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A62E3D812C0DCEFB002411B8 /* AllItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62E3D802C0DCEFB002411B8 /* AllItemsView.swift */; };
 		B71EEE142C08BB7200D0A0D8 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B71EEE132C08BB7200D0A0D8 /* RealmSwift */; };
 		B71EEE162C08BB7200D0A0D8 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B71EEE132C08BB7200D0A0D8 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B72AD0422C08B9AA0002C903 /* IOS_UW_MarketplaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72AD0412C08B9AA0002C903 /* IOS_UW_MarketplaceApp.swift */; };
@@ -16,11 +17,12 @@
 		B72AD05D2C08B9AB0002C903 /* IOS_UW_MarketplaceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72AD05C2C08B9AB0002C903 /* IOS_UW_MarketplaceUITests.swift */; };
 		B72AD05F2C08B9AB0002C903 /* IOS_UW_MarketplaceUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72AD05E2C08B9AB0002C903 /* IOS_UW_MarketplaceUITestsLaunchTests.swift */; };
 		B72AD0712C08B9CD0002C903 /* SellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72AD06C2C08B9CD0002C903 /* SellView.swift */; };
-		B72AD0732C08B9CD0002C903 /* AllItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72AD06E2C08B9CD0002C903 /* AllItemsView.swift */; };
+		B73B7FE22C0DEEED00A7366F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73B7FE12C0DEEED00A7366F /* MainView.swift */; };
 		B78911F92C0C4FF800F030A9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78911F82C0C4FF800F030A9 /* LoginView.swift */; };
 		B78911FC2C0C540C00F030A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78911FB2C0C540C00F030A9 /* AppDelegate.swift */; };
 		B78912002C0C5F1600F030A9 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78911FF2C0C5F1600F030A9 /* UserProfileView.swift */; };
 		B78912052C0C77F700F030A9 /* MSAL in Frameworks */ = {isa = PBXBuildFile; productRef = B78912042C0C77F700F030A9 /* MSAL */; };
+		B7DB55612C0E41A0008F1238 /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DB55602C0E41A0008F1238 /* EditItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A62E3D802C0DCEFB002411B8 /* AllItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllItemsView.swift; sourceTree = "<group>"; };
 		B72AD03E2C08B9AA0002C903 /* IOS UW Marketplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS UW Marketplace.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B72AD0412C08B9AA0002C903 /* IOS_UW_MarketplaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_UW_MarketplaceApp.swift; sourceTree = "<group>"; };
 		B72AD0452C08B9AB0002C903 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,11 +78,12 @@
 		B72AD05C2C08B9AB0002C903 /* IOS_UW_MarketplaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_UW_MarketplaceUITests.swift; sourceTree = "<group>"; };
 		B72AD05E2C08B9AB0002C903 /* IOS_UW_MarketplaceUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_UW_MarketplaceUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B72AD06C2C08B9CD0002C903 /* SellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellView.swift; sourceTree = "<group>"; };
-		B72AD06E2C08B9CD0002C903 /* AllItemsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllItemsView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcfilelist; };
+		B73B7FE12C0DEEED00A7366F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		B78911F82C0C4FF800F030A9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B78911FA2C0C510C00F030A9 /* IOS-UW-Marketplace-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "IOS-UW-Marketplace-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B78911FB2C0C540C00F030A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B78911FF2C0C5F1600F030A9 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		B7DB55602C0E41A0008F1238 /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,11 +139,13 @@
 			children = (
 				B78911FA2C0C510C00F030A9 /* IOS-UW-Marketplace-Info.plist */,
 				B72AD0412C08B9AA0002C903 /* IOS_UW_MarketplaceApp.swift */,
+				B73B7FE12C0DEEED00A7366F /* MainView.swift */,
+				B7DB55602C0E41A0008F1238 /* EditItemView.swift */,
 				B78911F82C0C4FF800F030A9 /* LoginView.swift */,
 				B78911FB2C0C540C00F030A9 /* AppDelegate.swift */,
-				B72AD06E2C08B9CD0002C903 /* AllItemsView.swift */,
 				B72AD06C2C08B9CD0002C903 /* SellView.swift */,
 				B78911FF2C0C5F1600F030A9 /* UserProfileView.swift */,
+				A62E3D802C0DCEFB002411B8 /* AllItemsView.swift */,
 				B72AD0452C08B9AB0002C903 /* Assets.xcassets */,
 				B72AD0472C08B9AB0002C903 /* Preview Content */,
 			);
@@ -322,9 +328,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B78912002C0C5F1600F030A9 /* UserProfileView.swift in Sources */,
+				B73B7FE22C0DEEED00A7366F /* MainView.swift in Sources */,
+				A62E3D812C0DCEFB002411B8 /* AllItemsView.swift in Sources */,
 				B78911F92C0C4FF800F030A9 /* LoginView.swift in Sources */,
 				B72AD0712C08B9CD0002C903 /* SellView.swift in Sources */,
-				B72AD0732C08B9CD0002C903 /* AllItemsView.swift in Sources */,
+				B7DB55612C0E41A0008F1238 /* EditItemView.swift in Sources */,
 				B78911FC2C0C540C00F030A9 /* AppDelegate.swift in Sources */,
 				B72AD0422C08B9AA0002C903 /* IOS_UW_MarketplaceApp.swift in Sources */,
 			);
@@ -487,6 +495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "IOS UW Marketplace/IOS UW Marketplace.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IOS UW Marketplace/Preview Content\"";
@@ -517,6 +526,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "IOS UW Marketplace/IOS UW Marketplace.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IOS UW Marketplace/Preview Content\"";
