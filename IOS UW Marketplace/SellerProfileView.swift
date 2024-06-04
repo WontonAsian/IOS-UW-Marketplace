@@ -1,77 +1,33 @@
 import SwiftUI
 
-struct AllItemsView: View {
-    var userName: String
-    var userEmail: String
-    @Binding var isAuthenticated: Bool
-    @State private var allItems: [ListedItem] = []
-    @State private var searchQuery = ""
-    @State private var selectedCategory = "All"
-    private var categories = ["All", "Home Goods", "Electronics", "Clothing", "Misc"]
+struct SellerProfileView: View {
+    let sellerID: String
+    let userEmail: String  // Pass the current user's email
+    @State private var sellerItems: [ListedItem] = []
 
-    init(userName: String, userEmail: String, isAuthenticated: Binding<Bool>) {
-        self.userName = userName
-        self.userEmail = userEmail
-        self._isAuthenticated = isAuthenticated
-    }
 
     var body: some View {
         NavigationView {
-            VStack {
-                HStack {
-                    TextField("Search", text: $searchQuery)
-                        .padding(7)
-                        .background(Color(.systemGray6))
-                        .cornerRadius(8)
-                        .padding(.horizontal, 10)
-                    
-                    Picker("Category", selection: $selectedCategory) {
-                        ForEach(categories, id: \.self) { category in
-                            Text(category).tag(category)
-                        }
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                }
-                .padding()
-                
-                List(filteredItems) { item in
-                    AllItemRow(item: item, userEmail: userEmail, onItemBought: { boughtItem in
-                        removeItem(boughtItem)
-                    }, showSellerLink: true)
-                    .listRowInsets(EdgeInsets())
-                }
-                .refreshable {
-                    loadAllItems()
-                }
-                .navigationBarTitle("All Items", displayMode: .inline)
-                .onAppear {
-                    loadAllItems()
-                }
+            List(sellerItems) { item in
+                SellerItemRow(item: item, userEmail: userEmail, onItemBought: { boughtItem in
+                    removeItem(boughtItem)
+                })
+                .listRowInsets(EdgeInsets())  // Remove insets for a consistent look
+            }
+            .navigationBarTitle("Seller: \(sellerID)", displayMode: .inline)
+            .onAppear {
+                loadSellerItems()
             }
         }
     }
 
-    private var filteredItems: [ListedItem] {
-        var items = allItems
-
-        if selectedCategory != "All" {
-            items = items.filter { $0.category == selectedCategory }
-        }
-
-        if !searchQuery.isEmpty {
-            items = items.filter { $0.title.lowercased().contains(searchQuery.lowercased()) }
-        }
-
-        return items
-    }
-
-    private func loadAllItems() {
-        fetchAllItems { items in
-            self.allItems = items
+    private func loadSellerItems() {
+        fetchSellerItems { items in
+            self.sellerItems = items
         }
     }
 
-    private func fetchAllItems(completion: @escaping ([ListedItem]) -> Void) {
+    private func fetchSellerItems(completion: @escaping ([ListedItem]) -> Void) {
         let apiKey = "evWnPMfG5GwnCghHBR3zb5kTsDMwnmfU2JTvE8fywXL87nV5y0vaYgxn8D793NLe"
         let baseURL = "https://us-west-2.aws.data.mongodb-api.com/app/data-xogcpqd/endpoint/data/v1/action/find"
 
@@ -89,7 +45,7 @@ struct AllItemsView: View {
             "collection": "Item",
             "database": "SellingItems",
             "dataSource": "Cluster0",
-            "filter": ["isSold": ["$eq": false]]
+            "filter": ["sellerID": sellerID, "isSold": ["$eq": false]]
         ]
 
         request.httpBody = try? JSONSerialization.data(withJSONObject: requestBody, options: [])
@@ -121,52 +77,47 @@ struct AllItemsView: View {
     }
 
     private func removeItem(_ item: ListedItem) {
-        allItems.removeAll { $0.id == item.id }
+        sellerItems.removeAll { $0.id == item.id }
     }
 }
 
-struct AllItemRow: View {
+struct SellerItemRow: View {
     let item: ListedItem
     let userEmail: String
     let onItemBought: (ListedItem) -> Void
-    let showSellerLink: Bool
     @State private var showAlert = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(item.title)
-                .font(.headline)
-            Text(item.itemDescription)
-                .font(.subheadline)
-            Text("Category: \(item.category)")
-                .font(.subheadline)
-            Text("Price: \(formatPrice(item.price))")
-                .font(.subheadline)
-            Text("Date Posted: \(formatDate(item.datePosted))")
-                .font(.subheadline)
+            HStack {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(item.title)
+                        .font(.headline)
+                    Text(item.itemDescription)
+                        .font(.subheadline)
+                    Text("Category: \(item.category)")
+                        .font(.subheadline)
+                    Text("Price: \(formatPrice(item.price))")
+                        .font(.subheadline)
+                    Text("Date Posted: \(formatDate(item.datePosted))")
+                        .font(.subheadline)
 
-            if showSellerLink {
-                NavigationLink(destination: SellerProfileView(sellerID: item.sellerID, userEmail: userEmail)) {
                     Text("Seller: \(item.sellerID)")
                         .font(.subheadline)
                         .foregroundColor(.blue)
                 }
-            } else {
-                Text("Seller: \(item.sellerID)")
-                    .font(.subheadline)
-                    .foregroundColor(.blue)
+                Spacer() // This will push the content to the left and fill the remaining space
             }
-        }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.gray, lineWidth: 1)
-        )
-        .shadow(radius: 5)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray, lineWidth: 1)
+            )
 
-        BuyButton(item: item, userEmail: userEmail, showAlert: $showAlert, onItemBought: onItemBought).disabled(false)
+        }
+        SellerBuyButton(item: item, userEmail: userEmail, showAlert: $showAlert, onItemBought: onItemBought)
     }
 
     private func formatPrice(_ price: Double) -> String {
@@ -188,7 +139,7 @@ struct AllItemRow: View {
     }
 }
 
-struct BuyButton: View {
+struct SellerBuyButton: View {
     let item: ListedItem
     let userEmail: String
     @Binding var showAlert: Bool
@@ -262,35 +213,4 @@ struct BuyButton: View {
             }
         }.resume()
     }
-}
-
-
-
-
-struct AllItemsView_Previews: PreviewProvider {
-    @State static var isAuthenticated = true
-    static var previews: some View {
-        AllItemsView(userName: "michelle", userEmail: "mwu1@uw.edu", isAuthenticated: $isAuthenticated)
-    }
-}
-
-struct ListedItem: Identifiable, Codable {
-    var id: String { _id }
-    var _id: String
-    var title: String
-    var price: Double
-    var itemDescription: String
-    var category: String
-    var datePosted: String
-    var isSold: Bool
-    var sellerID: String
-    var buyerID: String?
-
-    private enum CodingKeys: String, CodingKey {
-        case _id, title, price, itemDescription, category, datePosted, isSold, sellerID, buyerID
-    }
-}
-
-struct MongoResponse: Codable {
-    let documents: [ListedItem]
 }
