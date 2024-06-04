@@ -5,23 +5,64 @@ struct AllItemsView: View {
     var userEmail: String
     @Binding var isAuthenticated: Bool
     @State private var allItems: [ListedItem] = []
+    @State private var searchQuery = ""
+    @State private var selectedCategory = "All"
+    private var categories = ["All", "Home Goods", "Electronics", "Clothing", "Misc"]
+
+    init(userName: String, userEmail: String, isAuthenticated: Binding<Bool>) {
+        self.userName = userName
+        self.userEmail = userEmail
+        self._isAuthenticated = isAuthenticated
+    }
 
     var body: some View {
         NavigationView {
-            List(allItems) { item in
-                AllItemRow(item: item, userEmail: userEmail, onItemBought: { boughtItem in
-                    removeItem(boughtItem)
-                }, showSellerLink: true) // Show seller link in AllItemsView
-                .listRowInsets(EdgeInsets())
-            }
-            .refreshable {
-                loadAllItems()
-            }
-            .navigationBarTitle("All Items", displayMode: .inline)
-            .onAppear {
-                loadAllItems()
+            VStack {
+                HStack {
+                    TextField("Search", text: $searchQuery)
+                        .padding(7)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .padding(.horizontal, 10)
+                    
+                    Picker("Category", selection: $selectedCategory) {
+                        ForEach(categories, id: \.self) { category in
+                            Text(category).tag(category)
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                }
+                .padding()
+                
+                List(filteredItems) { item in
+                    AllItemRow(item: item, userEmail: userEmail, onItemBought: { boughtItem in
+                        removeItem(boughtItem)
+                    }, showSellerLink: true)
+                    .listRowInsets(EdgeInsets())
+                }
+                .refreshable {
+                    loadAllItems()
+                }
+                .navigationBarTitle("All Items", displayMode: .inline)
+                .onAppear {
+                    loadAllItems()
+                }
             }
         }
+    }
+
+    private var filteredItems: [ListedItem] {
+        var items = allItems
+
+        if selectedCategory != "All" {
+            items = items.filter { $0.category == selectedCategory }
+        }
+
+        if !searchQuery.isEmpty {
+            items = items.filter { $0.title.lowercased().contains(searchQuery.lowercased()) }
+        }
+
+        return items
     }
 
     private func loadAllItems() {
@@ -104,9 +145,8 @@ struct AllItemRow: View {
             Text("Date Posted: \(formatDate(item.datePosted))")
                 .font(.subheadline)
 
-
             if showSellerLink {
-                NavigationLink(destination: SellerProfileView(sellerID: item.sellerID, userEmail: userEmail)) { // Pass userEmail here
+                NavigationLink(destination: SellerProfileView(sellerID: item.sellerID, userEmail: userEmail)) {
                     Text("Seller: \(item.sellerID)")
                         .font(.subheadline)
                         .foregroundColor(.blue)
