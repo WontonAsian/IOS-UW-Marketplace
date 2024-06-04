@@ -7,6 +7,9 @@ struct AllItemsView: View {
     @State private var allItems: [ListedItem] = []
     @State private var searchQuery = ""
     @State private var selectedCategory = "All"
+    @State private var minPrice: Double = 0
+    @State private var maxPrice: Double = 1000
+    @State private var showMoreFilters = false
     private var categories = ["All", "Home Goods", "Electronics", "Clothing", "Misc"]
 
     init(userName: String, userEmail: String, isAuthenticated: Binding<Bool>) {
@@ -31,6 +34,23 @@ struct AllItemsView: View {
                         }
                     }
                     .pickerStyle(MenuPickerStyle())
+                }
+                .padding()
+                
+                DisclosureGroup("More filters", isExpanded: $showMoreFilters) {
+                    VStack {
+                        HStack {
+                            Text("Min Price: \(Int(minPrice))")
+                            Slider(value: $minPrice, in: 0...maxPrice, step: 5)
+                                .padding(.horizontal)
+                        }
+
+                        HStack {
+                            Text("Max Price: \(Int(maxPrice))")
+                            Slider(value: $maxPrice, in: minPrice...1000, step: 5)
+                                .padding(.horizontal)
+                        }
+                    }
                 }
                 .padding()
                 
@@ -61,6 +81,8 @@ struct AllItemsView: View {
         if !searchQuery.isEmpty {
             items = items.filter { $0.title.lowercased().contains(searchQuery.lowercased()) }
         }
+        
+        items = items.filter { $0.price >= minPrice && $0.price <= maxPrice }
 
         return items
     }
