@@ -13,11 +13,17 @@ struct UserProfileView: View {
 
     var body: some View {
         NavigationView {
-            
             Form {
                 Section(header: Text("Profile Details")) {
                     Text("User Name: \(userName)")
                     Text("Email: \(userEmail)")
+                }
+
+                Section {
+                    Button("Log Out") {
+                        signOut()
+                    }
+                    .foregroundColor(.red)
                 }
 
                 DisclosureGroup("Listed Items", isExpanded: $showListedItems) {
@@ -45,17 +51,84 @@ struct UserProfileView: View {
                         }
                     }
                 }
-                
-                Button("Log Out") {
-                    signOut()
-                }
-                .foregroundColor(.red)
             }
             .navigationBarTitle("User Profile", displayMode: .inline)
             .onAppear {
+                initializeMSAL()
                 loadUserItems()
                 loadBoughtItems()
             }
+        }
+    }
+
+    private func initializeMSAL() {
+        let kClientID = "bcdfc7af-cdef-48f8-b4ec-ab4a664d06dd"
+        let kRedirectUri = "msauth.com.449.auth://auth"
+        let kAuthority = "https://login.microsoftonline.com/common"
+        
+        do {
+            let authorityURL = URL(string: kAuthority)!
+            let authority = try MSALAuthority(url: authorityURL)
+            let config = MSALPublicClientApplicationConfig(clientId: kClientID, redirectUri: kRedirectUri, authority: authority)
+            self.application = try MSALPublicClientApplication(configuration: config)
+            print("MSAL configuration successful.")
+        } catch let error as NSError {
+            print("Error creating MSAL configuration: \(error.localizedDescription)")
+        }
+    }
+
+    private func signOut() {
+        guard let application = self.application else { return }
+
+        do {
+            guard let currentAccount = try application.allAccounts().first else {
+                print("No current account found.")
+                return
+            }
+
+            // Get the current window scene for presenting the sign-out web view
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else {
+                print("Failed to get the window scene.")
+                return
+            }
+
+            let webViewParameters = MSALWebviewParameters(authPresentationViewController: window.rootViewController!)
+            let signoutParameters = MSALSignoutParameters(webviewParameters: webViewParameters)
+            
+            application.signout(with: currentAccount, signoutParameters: signoutParameters) { (success, error) in
+                if let error = error {
+                    print("Failed to sign out: \(error.localizedDescription)")
+                } else {
+                    print("Successfully signed out")
+                    
+                    // Clear web view cookies
+                    HTTPCookieStorage.shared.cookies?.forEach { cookie in
+                        HTTPCookieStorage.shared.deleteCookie(cookie)
+                    }
+                    
+                    // Clear cache
+                    let dataStore = WKWebsiteDataStore.default()
+                    dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+                        records.forEach { record in
+                            dataStore.removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+                        }
+                        clearUserDefaults()
+                    }
+                }
+            }
+        } catch {
+            print("Error retrieving accounts: \(error.localizedDescription)")
+        }
+    }
+
+    private func clearUserDefaults() {
+        UserDefaults.standard.removeObject(forKey: "isAuthenticated")
+        UserDefaults.standard.removeObject(forKey: "userName")
+        UserDefaults.standard.removeObject(forKey: "userEmail")
+
+        DispatchQueue.main.async {
+            isAuthenticated = false
         }
     }
 
@@ -171,44 +244,6 @@ struct UserProfileView: View {
         }.resume()
     }
 
-    private func signOut() {
-        // Clear authentication state and user info from UserDefaults
-        UserDefaults.standard.removeObject(forKey: "isAuthenticated")
-        UserDefaults.standard.removeObject(forKey: "userName")
-        UserDefaults.standard.removeObject(forKey: "userEmail")
-
-        // Remove the current account from MSAL cache
-        clearAuthenticationState()
-
-        // Update isAuthenticated binding to navigate back to LoginView
-        isAuthenticated = false
-    }
-
-    private func clearAuthenticationState() {
-        // Check if the application instance is initialized
-        guard let application = self.application else {
-            print("MSAL application instance is not initialized.")
-            return
-        }
-
-        do {
-            // Retrieve the current account
-            guard let currentAccount = try application.allAccounts().first else {
-                print("No current account found.")
-                return
-            }
-
-            // Remove the current account
-            do {
-                try application.remove(currentAccount)
-            } catch let error {
-                print("Failed to remove account: \(error.localizedDescription)")
-            }
-        } catch {
-            print("Error retrieving accounts: \(error.localizedDescription)")
-        }
-    }
-
     private func updateItem(_ updatedItem: ListedItem) {
         if let index = listedItems.firstIndex(where: { $0.id == updatedItem.id }) {
             listedItems[index] = updatedItem
@@ -292,12 +327,18 @@ struct EditItemView: View {
     let onItemDeleted: (ListedItem) -> Void
     @Environment(\.presentationMode) var presentationMode
 
+    let categories = ["Electronics", "Clothing", "Books", "Furniture", "Other"]
+
     var body: some View {
         Form {
             Section(header: Text("Edit Item")) {
                 TextField("Title", text: $item.title)
                 TextField("Description", text: $item.itemDescription)
-                TextField("Category", text: $item.category)
+                Picker("Category", selection: $item.category) {
+                    ForEach(categories, id: \.self) {
+                        Text($0)
+                    }
+                }
                 TextField("Price", value: $item.price, formatter: NumberFormatter())
             }
             Button("Save") {
