@@ -14,6 +14,9 @@ struct AllItemsView: View {
                 }, showSellerLink: true) // Show seller link in AllItemsView
                 .listRowInsets(EdgeInsets())
             }
+            .refreshable {
+                loadAllItems()
+            }
             .navigationBarTitle("All Items", displayMode: .inline)
             .onAppear {
                 loadAllItems()
@@ -112,7 +115,8 @@ struct AllItemRow: View {
                 Text("Seller: \(item.sellerID)")
                     .font(.subheadline)
                     .foregroundColor(.blue)
-            }        }
+            }
+        }
         .padding()
         .background(Color.white)
         .cornerRadius(10)
@@ -219,6 +223,7 @@ struct BuyButton: View {
         }.resume()
     }
 }
+
 
 
 
